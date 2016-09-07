@@ -9,6 +9,8 @@ var Restaurant = require('./models/restaurant');
 var Activity = require('./models/activity');
 var Day = require('./models/day');
 var Meal = require('./models/meal');
+var Adventure = require('./models/adventure');
+var Stay = require('./models/stay');
 
 var data = {
   hotel: [

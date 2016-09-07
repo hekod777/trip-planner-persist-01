@@ -7,6 +7,9 @@ var Activity = require('./activity');
 
 var Day = require('./day');
 var Meal = require('./meal');
+var Stay = require('./stay');
+var Adventure = require('./adventure');
+
 
 Hotel.belongsTo(Place);
 Restaurant.belongsTo(Place);
@@ -14,5 +17,11 @@ Activity.belongsTo(Place);
 
 Meal.belongsTo(Restaurant);
 Day.hasMany(Meal);
+
+Adventure.belongsTo(Activity);
+Day.hasMany(Adventure);
+
+Stay.belongsTo(Hotel);
+Day.hasOne(Stay);
 
 module.exports = db;

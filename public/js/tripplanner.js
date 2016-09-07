@@ -116,6 +116,13 @@ Tripplanner.prototype.addItem = function(id, type){
   var item = this.getItemByIdAndType(id*1, type);
   this.days[this.currentIdx][type].push(item);
   this.renderItem(item, type);
+
+  var currentDay = this.days[this.currentIdx]
+
+  $.post('/days/newstuff/'+id +'/type/' +type)
+    .then(function(newstuff){
+      console.log(newstuff);
+    })
 };
 
 Tripplanner.prototype.removeItem = function(idx, type, elem){
@@ -126,8 +133,24 @@ Tripplanner.prototype.removeItem = function(idx, type, elem){
 };
 
 Tripplanner.prototype.init = function(){
+  $.get('/days/hotels')
+  .then(function(results){
+    results[0].map(function(result){
+      $('#hotel-choices').append(`<option value="${ result.id }"> ${ result.name }</option>`);
+    });
+
+    results[1].map(function(result){
+      $('#restaurant-choices').append(`<option value="${ result.id }"> ${ result.name }</option>`);
+    });
+
+    results[2].map(function(result){
+      $('#activity-choices').append(`<option value="${ result.id }"> ${ result.name }</option>`);
+    })
+  });
+
   var that = this;
   $('#button-add').click(function(){
+    $.post('/days/newDay');
     that.addDay();
   });
 
@@ -148,8 +171,10 @@ Tripplanner.prototype.init = function(){
   });
 
   $('button[data-action]').click(function(){
+   
     var select = $(this).prev();
     var type = select.attr('data-type');
     that.addItem(select.val(), type);
+
   });
 }

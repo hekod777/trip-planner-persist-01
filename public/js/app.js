@@ -26,6 +26,16 @@ $(function(){
       }
     ];
     */
+  /*initializeHotels(function(map,marker){
+    $.ajax({
+      url:'/hotels',
+      method:'GET',
+    })
+      .then(function(hotels){
+        
+      })
+  })*/
+
   });
   
 });
